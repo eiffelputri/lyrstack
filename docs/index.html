@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta http-equiv="Content-Security-Policy" content="default-src &#39;self&#39;; script-src &#39;self&#39; &#39;unsafe-eval&#39; https://textalive.jp https://*.textalive.jp https://songle.jp https://*.songle.jp; connect-src &#39;self&#39; https://textalive.jp https://*.textalive.jp https://songle.jp https://*.songle.jp https://piapro.jp https://*.piapro.jp; media-src &#39;self&#39; https: blob:; img-src &#39;self&#39; data: https:; style-src &#39;self&#39; &#39;unsafe-inline&#39;; font-src &#39;self&#39; data:; object-src &#39;none&#39;; base-uri &#39;self&#39;; form-action &#39;none&#39;">
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#FFF6E5" />
+    <meta name="description" content="LyrStack: 歌詞がブロックになって落ちてくる、マジカルミライ2026プロコン向けのリリックアプリ" />
+    <title>LyrStack | Magical Mirai 2026</title>
+    <script type="module" crossorigin src="./assets/index-BNCmtJjK.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-CaBHbHJd.css">
+  </head>
+  <body data-screen="title">
+    <div id="media" hidden></div>
+
+    <!-- landing page -->
+    <section id="screen-title" class="screen screen-title" aria-labelledby="logo">
+      <div class="deco" aria-hidden="true">
+        <span class="deco-block deco-1"></span>
+        <span class="deco-block deco-2"></span>
+        <span class="deco-block deco-3"></span>
+        <span class="deco-block deco-4"></span>
+      </div>
+
+      <!-- easter egg -->
+      <div id="egg-wrap" class="egg">
+        <svg class="egg-ring" viewBox="0 0 80 80" aria-hidden="true">
+          <defs>
+            <path id="egg-path" d="M30 10H50A20 20 0 0 1 70 30V50A20 20 0 0 1 50 70H30A20 20 0 0 1 10 50V30A20 20 0 0 1 30 10Z" />
+          </defs>
+          <text><textPath href="#egg-path" textLength="198" lengthAdjust="spacing">click me ✦ click me ✦ click me ✦</textPath></text>
+        </svg>
+        <button id="egg" class="egg-block" type="button" aria-label="click me" aria-expanded="false" aria-controls="egg-msg"></button>
+        <p id="egg-msg" class="egg-msg">
+          <small>つくったひと</small>
+          <span>made by <a class="egg-link" href="https://github.com/eiffelputri" target="_blank" rel="noopener noreferrer"><strong>Eiffel</strong></a> ♡</span>
+        </p>
+      </div>
+
+      <div class="title-card">
+        <p class="stamp">マジカルミライ 2026<br />プログラミング・コンテスト</p>
+        <h1 id="logo" class="logo">Lyr<span>Stack</span></h1>
+        <p class="logo-kana">リリック・スタック</p>
+        <p class="tagline">うたう ことばを つみあげよう</p>
+        <button id="btn-start" class="btn btn-primary btn-big" type="button">
+          PLAY <small>あそぶ</small>
+        </button>
+        <p id="title-status" class="status" role="status"></p>
+      </div>
+
+      <p class="title-foot">
+        Powered by <a href="https://developer.textalive.jp/" target="_blank" rel="noopener noreferrer">TextAlive App API</a>
+        &amp; <a href="https://api.songle.jp/" target="_blank" rel="noopener noreferrer">Songle API</a>
+      </p>
+    </section>
+
+    <!-- song list -->
+    <section id="screen-select" class="screen screen-select" aria-labelledby="select-heading" hidden>
+      <header class="screen-head">
+        <button id="btn-select-back" class="btn btn-small" type="button">← もどる</button>
+        <h2 id="select-heading">きょくを えらぶ <small>SELECT A SONG</small></h2>
+      </header>
+      <ul id="song-list" class="song-list"></ul>
+    </section>
+
+    <!-- game -->
+    <section id="screen-game" class="screen screen-game" aria-label="Game" hidden>
+      <div class="panel panel-left">
+        <div class="card song-card">
+          <p class="flavor-chip"><span id="game-flavor-ja"></span> <small id="game-flavor-en"></small></p>
+          <p id="game-song-title" class="song-title"></p>
+          <p id="game-song-artist" class="song-artist"></p>
+        </div>
+        <div class="card next-card">
+          <h3>NEXT <small>つぎ</small></h3>
+          <canvas id="next-canvas" class="next-canvas" aria-hidden="true"></canvas>
+        </div>
+        <div class="card archive-card">
+          <h3>BOX <small id="box-number">01</small></h3>
+          <div id="archive-list" class="archive-list"></div>
+        </div>
+      </div>
+
+      <div id="field-wrap" class="field-wrap">
+        <canvas id="field" class="field" aria-label="Playfield"></canvas>
+        <p id="field-hint" class="field-hint">▶ で スタート</p>
+      </div>
+
+      <div class="panel panel-right">
+        <div class="card score-card">
+          <h3>SCORE</h3>
+          <p id="score" class="score-value">0</p>
+          <div class="score-row">
+            <div class="rank-stamp" aria-label="Rank"><span id="rank">-</span></div>
+            <dl class="stats">
+              <div><dt>MAX COMBO</dt><dd id="combo">0</dd></div>
+              <div><dt>LINES</dt><dd id="lines">0</dd></div>
+              <div><dt>NICE</dt><dd id="nice">0</dd></div>
+            </dl>
+          </div>
+        </div>
+        <div class="card best-card">
+          <h3>MY BEST <small>じこベスト</small></h3>
+          <p class="best-score"><span id="best-score">0</span> <span id="best-rank" class="best-rank"></span> <span id="best-new" class="best-new" hidden>NEW!</span></p>
+          <p class="best-meta"><span id="best-plays">0</span> PLAYS</p>
+          <ol id="best-history" class="history"></ol>
+        </div>
+      </div>
+
+      <nav class="controls" aria-label="Controls">
+        <button id="btn-menu" class="btn btn-round" type="button" aria-label="Back to song select" title="曲をえらぶ">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+        </button>
+        <button id="btn-restart" class="btn btn-round" type="button" aria-label="Restart" title="さいしょから" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12a7 7 0 1 0 2.1-5" /><path d="M5 4v4h4" /></svg>
+        </button>
+        <button id="btn-play" class="btn btn-round btn-play" type="button" aria-label="Play" disabled>
+          <svg class="icon-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 5h4v14H7zM13 5h4v14h-4z" /></svg>
+        </button>
+        <button id="btn-auto" class="btn btn-pill" type="button" aria-pressed="false">AUTO</button>
+        <button id="btn-help" class="btn btn-round" type="button" aria-label="How to play" title="あそびかた">?</button>
+      </nav>
+    </section>
+
+    <!-- result -->
+    <dialog id="result" class="dialog result" aria-labelledby="result-heading">
+      <p class="result-kicker">おつかれさま！</p>
+      <h2 id="result-heading">RESULT</h2>
+      <p id="result-song" class="result-song"></p>
+      <div class="result-main">
+        <div class="rank-stamp rank-stamp-big"><span id="result-rank">-</span></div>
+        <div>
+          <p class="result-score" id="result-score">0</p>
+          <p id="result-newbest" class="newbest" hidden>NEW BEST!</p>
+        </div>
+      </div>
+      <dl class="stats stats-result">
+        <div><dt>LINES</dt><dd id="result-lines">0</dd></div>
+        <div><dt>MAX COMBO</dt><dd id="result-combo">0</dd></div>
+        <div><dt>NICE</dt><dd id="result-nice">0</dd></div>
+        <div><dt>OVERFLOW</dt><dd id="result-overflow">0</dd></div>
+      </dl>
+      <div class="dialog-actions">
+        <button id="btn-retry" class="btn btn-primary" type="button">もういちど</button>
+        <button id="btn-result-select" class="btn" type="button">曲をえらぶ</button>
+      </div>
+    </dialog>
+
+    <!-- help -->
+    <dialog id="help" class="dialog help" aria-labelledby="help-heading">
+      <h2 id="help-heading">あそびかた <small>HOW TO PLAY</small></h2>
+      <p>歌われた ことばが ブロックに なって おちてくるよ。よこ一列を うめると きえる。はこから あふれたら ポイントが へっちゃう。</p>
+      <table class="keys">
+        <tbody>
+          <tr><th scope="row">Space</th><td>再生 / 一時停止</td></tr>
+          <tr><th scope="row">A S D F / J K L ;</th><td>列 1–8 をえらぶ</td></tr>
+          <tr><th scope="row">← →</th><td>列を となりへ</td></tr>
+          <tr><th scope="row">↓ / Enter / クリック</th><td>いちばん下のブロックを おとす（ビートに合わせると ポイントアップ）</td></tr>
+          <tr><th scope="row">M</th><td>AUTO（自動で おく）</td></tr>
+          <tr><th scope="row">?</th><td>このヘルプ</td></tr>
+          <tr><th scope="row">≡ ボタン</th><td>曲えらびに もどる</td></tr>
+          <tr><th scope="row">スマホのみ</th><td>フィールドを タップ か なぞって ねらう</td></tr>
+        </tbody>
+      </table>
+      <div class="dialog-actions">
+        <button id="btn-help-close" class="btn btn-primary" type="button">とじる</button>
+      </div>
+    </dialog>
+
+    <div id="loading" class="loading" hidden>
+      <div class="loading-box" role="status">
+        <div class="bottle" aria-hidden="true"><span></span></div>
+        <p id="loading-text">よみこみ中…</p>
+      </div>
+    </div>
+
+  </body>
+</html>

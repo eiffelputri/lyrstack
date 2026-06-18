@@ -1,0 +1,99 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  /* no double-tap zoom on phones */
+  touch-action: manipulation;
+  background-color: var(--cream);
+  /* polka dots in the flavour colour */
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--flavor) 55%, transparent) 2.5px,
+    transparent 3px
+  );
+  background-size: 26px 26px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.3s;
+}
+
+/* footer */
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto 0 0 0;
+  height: 10px;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--strawberry) 0 28px,
+    var(--soda) 28px 56px,
+    var(--banana) 56px 84px,
+    var(--melon) 84px 112px
+  );
+  border-top: var(--line) solid var(--ink);
+  pointer-events: none;
+  /* footer layer order */
+  z-index: 40;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-pop);
+  font-weight: 400;
+  margin: 0;
+}
+
+small {
+  font-size: 0.62em;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+}
+
+a {
+  color: var(--flavor-deep);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  /* no double-tap zoom on buttons */
+  touch-action: manipulation;
+}
+
+:focus-visible {
+  outline: 3px solid var(--alert);
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.screen {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

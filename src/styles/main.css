@@ -1,0 +1,10 @@
+/* fonts */
+@import "@fontsource/zen-maru-gothic/700.css";
+@import "@fontsource/mochiy-pop-one/400.css";
+
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";
+@import "./title.css";
+@import "./select.css";
+@import "./game.css";
