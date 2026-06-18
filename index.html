@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0612" />
+    <title>LyrStack — TAKEOVER (Magical Mirai 2026)</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <canvas id="stage"></canvas>
+    <div id="media" hidden></div>
+
+    <header id="topbar" hidden>
+      <h1 id="song-title">TAKEOVER</h1>
+      <p id="song-artist">Twinfield</p>
+    </header>
+
+    <div id="loading" class="overlay">
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="loading-text">Loading TextAlive…</p>
+    </div>
+
+    <footer id="controls" class="floating-controls">
+      <button id="btn-rewind" class="btn" title="Rewind" disabled aria-label="Rewind">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="currentColor" d="M6 6h2v12H6zM9.5 12l8.5 6V6z"/>
+        </svg>
+      </button>
+      <button id="btn-play" class="btn btn-play" title="Play" disabled aria-label="Play">
+        <svg class="icon-play" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M8 5v14l11-7z"/>
+        </svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/>
+        </svg>
+      </button>
+      <button id="btn-jump" class="btn" title="Jump to first lyric" disabled aria-label="Jump to lyric start">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+          <path fill="currentColor" d="M14.5 12L6 6v12zM16 6h2v12h-2z"/>
+        </svg>
+      </button>
+    </footer>
+
+    <div id="seekbar" hidden role="slider" aria-label="Seek"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div id="seekbar-fill"></div>
+      <div id="seekbar-handle"></div>
+    </div>
+
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

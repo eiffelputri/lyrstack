@@ -1,0 +1,18 @@
+{
+  "name": "magical-mirai-2026-lyric-app",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Lyric app for Hatsune Miku Magical Mirai 2026 Programming Contest, built with TextAlive App API + Vite",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "textalive-app-api": "^0.4.0"
+  },
+  "devDependencies": {
+    "vite": "^5.4.10"
+  }
+}
