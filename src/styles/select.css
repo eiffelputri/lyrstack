@@ -1,0 +1,285 @@
+.screen-select {
+  padding: 24px 20px 64px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.screen-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 20px;
+  margin-bottom: 26px;
+}
+
+.screen-head h2 {
+  font-size: clamp(1.5rem, 5vw, 2.2rem);
+}
+
+.screen-head h2 small {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* wooden shelf */
+.song-list {
+  --cols: 3;
+  --col-gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 230px));
+  justify-content: center;
+  gap: 44px var(--col-gap);
+  /* cartons line up at the bottom */
+  align-items: end;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.song-list > li {
+  position: relative;
+  padding: 0 4px 22px;
+}
+
+/* shelf plank */
+.song-list > li::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: calc(var(--col-gap) / -2);
+  right: calc(var(--col-gap) / -2);
+  height: 18px;
+  background: linear-gradient(var(--paper) 0 45%, var(--peach) 45% 100%);
+  border-block: var(--line) solid var(--ink);
+  box-shadow: 0 4px 0 var(--ink-faint);
+  z-index: -1;
+}
+
+.song-list > li:nth-child(3n + 1)::after {
+  left: -14px;
+  border-left: var(--line) solid var(--ink);
+  border-radius: 8px 0 0 8px;
+}
+
+.song-list > li:nth-child(3n)::after {
+  right: -14px;
+  border-right: var(--line) solid var(--ink);
+  border-radius: 0 8px 8px 0;
+}
+
+@media (max-width: 640px) {
+  .song-list {
+    --cols: 2;
+    --col-gap: 20px;
+    row-gap: 36px;
+  }
+
+  .song-list > li:nth-child(n)::after {
+    left: calc(var(--col-gap) / -2);
+    right: calc(var(--col-gap) / -2);
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+  }
+
+  .song-list > li:nth-child(2n + 1)::after {
+    left: -10px;
+    border-left: var(--line) solid var(--ink);
+    border-radius: 8px 0 0 8px;
+  }
+
+  .song-list > li:nth-child(2n)::after {
+    right: -10px;
+    border-right: var(--line) solid var(--ink);
+    border-radius: 0 8px 8px 0;
+  }
+
+}
+
+/* milk box and flavour */
+.carton {
+  --c: var(--soda);
+  --d: #2f7fa8;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+
+.carton:hover,
+.carton:focus-visible {
+  transform: translateY(-6px) rotate(-1.5deg);
+}
+
+.carton:active {
+  transform: translateY(-2px) scale(0.98);
+}
+
+.carton-top {
+  display: block;
+  width: 100%;
+  height: 46px;
+  margin-bottom: -3px;
+}
+
+.carton-top polygon,
+.carton-top rect {
+  fill: var(--c);
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.carton-body {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+  padding: 14px 12px 16px;
+  background: var(--c);
+  border: var(--line) solid var(--ink);
+  border-radius: 6px 6px 16px 16px;
+  box-shadow: var(--shadow);
+}
+
+.carton-flavor {
+  position: relative;
+  justify-self: center;
+  display: grid;
+  place-items: center;
+  width: 84px;
+  height: 84px;
+  margin: -2px 0 8px;
+  border: var(--line) solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper);
+  font-family: var(--font-pop);
+  font-size: 0.95rem;
+  line-height: 1.1;
+  color: var(--d);
+}
+
+/* English flavour name */
+.carton-flavor small {
+  position: absolute;
+  bottom: -9px;
+  left: 50%;
+  translate: -50% 0;
+  padding: 1px 8px;
+  white-space: nowrap;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--c);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+}
+
+.carton-label {
+  display: grid;
+  gap: 2px;
+  padding: 8px 10px;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+}
+
+.carton-title {
+  font-family: var(--font-pop);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.carton-artist {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.carton-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.72rem;
+}
+
+.carton-award {
+  padding: 1px 8px;
+  white-space: nowrap;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+}
+
+.carton-best {
+  display: grid;
+  justify-items: end;
+  font-family: var(--font-pop);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.carton-best small {
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-soft);
+}
+
+/* 前回 sticker */
+.carton-sticker {
+  position: absolute;
+  top: 30px;
+  right: -8px;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  padding: 4px 10px;
+  font-family: var(--font-pop);
+  font-size: 0.9rem;
+  line-height: 1.1;
+  background: var(--banana);
+  border: var(--line) solid var(--ink);
+  border-radius: 12px;
+  box-shadow: var(--shadow-small);
+  transform: rotate(10deg);
+}
+
+.carton-sticker small {
+  font-size: 0.55rem;
+  color: var(--ink);
+}
+
+/* phones */
+@media (max-width: 640px) {
+  .carton-body {
+    padding: 12px 10px 14px;
+  }
+
+  .carton-title {
+    font-size: 0.88rem;
+    /* break words only when they don't fit */
+    overflow-wrap: break-word;
+  }
+
+  .carton-label {
+    padding: 6px 6px;
+    min-width: 0;
+  }
+
+  .carton-meta {
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .carton-best {
+    justify-items: center;
+  }
+}

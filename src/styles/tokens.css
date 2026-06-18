@@ -1,0 +1,28 @@
+/* same colours as src/config/theme.js */
+:root {
+  --cream: #fff6e5;
+  --paper: #fffdf8;
+  --ink: #2b3a67;
+  --ink-soft: rgba(43, 58, 103, 0.68);
+  --ink-faint: rgba(43, 58, 103, 0.14);
+  --alert: #e8534a;
+
+  --strawberry: #f6a6b9;
+  --soda: #8fd3ee;
+  --melon: #b7e3a6;
+  --banana: #f9df8e;
+  --grape: #c9b6e8;
+  --peach: #ffc39e;
+
+  /* picked song flavour colour */
+  --flavor: var(--soda);
+  --flavor-deep: #2f7fa8;
+
+  --font-body: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Yu Gothic", sans-serif;
+  --font-pop: "Mochiy Pop One", "Zen Maru Gothic", "Hiragino Maru Gothic ProN", sans-serif;
+
+  --line: 3px;
+  --radius: 18px;
+  --shadow: 4px 4px 0 var(--ink);
+  --shadow-small: 2px 2px 0 var(--ink);
+}

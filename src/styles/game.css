@@ -1,0 +1,394 @@
+/* desktop layout */
+.screen-game {
+  display: grid;
+  grid-template-columns: minmax(180px, 250px) minmax(0, 1fr) minmax(190px, 260px);
+  grid-template-rows: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "left field right"
+    "controls controls controls";
+  gap: 16px 22px;
+  height: 100dvh;
+  padding: 18px 22px 26px;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-height: 0;
+}
+
+.panel-left {
+  grid-area: left;
+}
+
+.panel-right {
+  grid-area: right;
+}
+
+.field-wrap {
+  grid-area: field;
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  min-height: 0;
+}
+
+.field {
+  display: block;
+  touch-action: none;
+  cursor: crosshair;
+  filter: drop-shadow(5px 5px 0 var(--ink));
+}
+
+.field-hint {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  translate: -50% -50%;
+  margin: 0;
+  padding: 10px 20px;
+  background: var(--banana);
+  border: var(--line) solid var(--ink);
+  border-radius: 999px;
+  box-shadow: var(--shadow-small);
+  font-family: var(--font-pop);
+  white-space: nowrap;
+  pointer-events: none;
+  animation: wiggle 0.9s ease-in-out infinite alternate;
+}
+
+/* lyrics failed to load */
+.field-hint.is-warning {
+  width: max-content;
+  max-width: 92%;
+  padding: 10px 16px;
+  white-space: pre-line;
+  text-align: center;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  background: color-mix(in srgb, var(--strawberry) 45%, var(--paper));
+  animation: none;
+}
+
+.controls {
+  grid-area: controls;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+/* cards */
+
+.song-card {
+  background: var(--flavor);
+}
+
+.flavor-chip {
+  display: inline-block;
+  margin: 0 0 6px;
+  padding: 1px 10px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--paper);
+  font-family: var(--font-pop);
+  font-size: 0.85rem;
+  color: var(--flavor-deep);
+}
+
+.song-title {
+  margin: 0;
+  font-family: var(--font-pop);
+  font-size: 1.15rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.song-artist {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.next-canvas {
+  display: block;
+  width: 100%;
+  height: 120px;
+}
+
+.archive-card {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* overflowed boxes */
+.archive-list {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+  align-content: start;
+  gap: 10px 6px;
+  /* hidden scrollbar */
+  scrollbar-width: none;
+}
+
+.archive-list::-webkit-scrollbar {
+  display: none;
+}
+
+.archive-item {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  font-size: 0.7rem;
+  color: var(--ink-soft);
+}
+
+.archive-item canvas {
+  display: block;
+  width: 48px;
+  height: 72px;
+}
+
+.archive-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.score-card {
+  background: color-mix(in srgb, var(--banana) 45%, var(--paper));
+}
+
+.score-value {
+  margin: 0 0 8px;
+  font-family: var(--font-pop);
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  transition: transform 0.1s;
+}
+
+.score-value.bump {
+  transform: scale(1.08);
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.score-row .stats {
+  flex: 1;
+}
+
+.best-score {
+  margin: 0;
+  font-family: var(--font-pop);
+  font-size: 1.35rem;
+}
+
+.best-rank {
+  font-size: 1rem;
+  color: var(--flavor-deep);
+}
+
+.best-new {
+  display: inline-block;
+  padding: 0 8px;
+  font-size: 0.75rem;
+  vertical-align: middle;
+  background: var(--banana);
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  transform: rotate(-6deg);
+}
+
+.best-meta {
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+}
+
+.history {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+}
+
+.history li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  border-top: 2px dashed var(--ink-faint);
+}
+
+.history .muted {
+  color: var(--ink-soft);
+}
+
+/* tablet and phone layout */
+@media (max-width: 900px), (max-aspect-ratio: 4/5) {
+  .screen-game {
+    grid-template-columns: minmax(0, 1fr) 118px;
+    grid-template-rows: auto auto minmax(0, 1fr) auto;
+    grid-template-areas:
+      "song next"
+      "score next"
+      "field field"
+      "controls controls";
+    gap: 10px;
+    padding: 10px 12px 22px;
+  }
+
+  .panel {
+    display: contents;
+  }
+
+  .song-card {
+    grid-area: song;
+    padding: 6px 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .flavor-chip {
+    margin: 0;
+    flex: none;
+  }
+
+  .flavor-chip small {
+    display: none;
+  }
+
+  .song-title {
+    font-size: 0.95rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .song-artist {
+    display: none;
+  }
+
+  .next-card {
+    grid-area: next;
+    padding: 6px 8px;
+  }
+
+  .next-card h3 {
+    font-size: 0.8rem;
+    margin: 0;
+  }
+
+  .next-canvas {
+    height: 72px;
+  }
+
+  .score-card {
+    grid-area: score;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 12px;
+    min-width: 0;
+  }
+
+  .score-card h3 {
+    display: none;
+  }
+
+  .score-value {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+
+  .score-row {
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .score-row .stats {
+    display: flex;
+    gap: 8px;
+  }
+
+  .score-row .stats dt {
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+  }
+
+  .score-row .stats > div {
+    flex-direction: column;
+    gap: 0;
+    line-height: 1.2;
+  }
+
+  .rank-stamp {
+    width: 44px;
+    height: 44px;
+    font-size: 1.4rem;
+    border-width: 3px;
+  }
+
+  .archive-card,
+  .best-card {
+    display: none;
+  }
+
+  .controls {
+    flex-wrap: nowrap;
+    gap: 6px;
+  }
+
+  .btn-round {
+    width: 44px;
+    height: 44px;
+  }
+
+  .btn-play {
+    width: 56px;
+    height: 56px;
+  }
+
+  .btn-pill {
+    min-width: 0;
+    padding: 0 12px;
+  }
+
+  .field {
+    filter: drop-shadow(3px 3px 0 var(--ink));
+  }
+}
+
+/* small phones */
+@media (max-width: 420px) {
+  .screen-game {
+    grid-template-columns: minmax(0, 1fr) 96px;
+  }
+
+  .score-card {
+    flex-wrap: wrap;
+    row-gap: 2px;
+  }
+
+  .score-row {
+    flex: 1;
+  }
+}
